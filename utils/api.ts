@@ -1,7 +1,9 @@
 import axios from "axios";
 
+export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export const api = axios.create({
-  baseURL: "https://api.sport724.ir/api",
+  baseURL: BASE_URL,
   timeout: 10000,
 });
 

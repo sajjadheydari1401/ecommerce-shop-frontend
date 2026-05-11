@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Define your brand color if you have one */
+  --color-brand: #3b82f6; /* Example - adjust to your brand color */
+}
 
 :root {
   --bg: #ffffff;
@@ -30,13 +33,14 @@ body {
 /* Basic typography helpers */
 body {
   font-family:
+    Inter,
     system-ui,
     -apple-system,
     "Segoe UI",
     Roboto,
     "Helvetica Neue",
     Arial;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 h1 {
@@ -59,9 +63,49 @@ p {
   padding-right: 1rem;
 }
 
+/* Reusable UI helpers - Update @apply syntax for v4 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-primary {
+  background-color: var(--color-brand, #3b82f6);
+  color: white;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  border: 1px solid;
+  color: rgb(55 65 81);
+}
+
+.dark .btn-ghost {
+  color: rgb(229 231 235);
+}
+
+.card {
+  background-color: var(--bg);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
 .skeleton {
   background-color: #e5e7eb;
-  border-radius: 4px;
+  border-radius: 8px;
   animation: pulse 1.5s ease-in-out 0.2s infinite;
 }
 

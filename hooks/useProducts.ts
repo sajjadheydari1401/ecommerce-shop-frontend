@@ -5,44 +5,27 @@ type UseProductsParams = {
   page?: number;
   size?: number;
   search?: string;
-  minPrice?: number | string | null;
-  maxPrice?: number | string | null;
   category?: string | null;
 };
 
 export function useProducts({
   page = 1,
-  size = 10,
+  size = 20,
   search,
-  minPrice,
-  maxPrice,
+  category,
 }: UseProductsParams = {}) {
-  return useQuery(
-    [
-      "products",
-      page,
-      size,
-      search,
-      minPrice,
-      maxPrice,
-      arguments[0]?.category,
-    ],
-    async () => {
-      const params: Record<string, any> = { page, size };
-      if (search) params.search = search;
-      if (minPrice != null && minPrice !== "") params.minPrice = minPrice;
-      if (maxPrice != null && maxPrice !== "") params.maxPrice = maxPrice;
-      if ((arguments[0] as UseProductsParams)?.category)
-        params.category = (arguments[0] as UseProductsParams).category;
+  return useQuery(["products", page, size, search, category], async () => {
+    const params: Record<string, any> = { page, size };
+    if (search) params.textSearch = search;
+    if (category) params.category = category;
 
-      const res = await api.get("/products", { params });
-      const data = res.data || {};
-      return {
-        items: data.result || [],
-        pagination: data.pagination || null,
-      };
-    },
-  );
+    const res = await api.get("/products", { params });
+    const data = res.data || {};
+    return {
+      items: data.result || [],
+      pagination: data.pagination || null,
+    };
+  });
 }
 
 export function useProduct(productId: string | string[] | undefined) {

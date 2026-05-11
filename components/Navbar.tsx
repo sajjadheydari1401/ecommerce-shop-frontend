@@ -41,29 +41,32 @@ export default function Navbar({
   }
 
   return (
-    <header className="w-full bg-white dark:bg-gray-900 shadow-sm">
-      <div className="container flex items-center justify-between py-3">
-        <Link
-          href="/"
-          className="text-lg font-semibold text-gray-900 dark:text-gray-100"
-        >
-          E-Commerce Demo
+    <header className="w-full bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm sticky top-0 z-30">
+      <div className="container flex items-center justify-between py-4">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="w-9 h-9 bg-brand rounded-md flex items-center justify-center text-white font-bold">
+            E
+          </div>
+          <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            E-Commerce
+          </span>
         </Link>
+
         <div className="flex items-center gap-3">
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="px-3 py-1 border rounded text-sm"
+            className="btn btn-ghost"
           >
             {dark ? "Light" : "Dark"}
           </button>
           <button
             onClick={onToggleCart}
-            className="flex items-center gap-2 rounded bg-brand px-3 py-1 text-white"
+            className="btn btn-primary flex items-center gap-2"
           >
-            Cart
+            <span>Cart</span>
             {totalCount > 0 && (
-              <span className="rounded-full bg-white text-brand px-2 text-sm">
+              <span className="rounded-full bg-white text-brand px-2 text-xs font-medium">
                 {totalCount}
               </span>
             )}

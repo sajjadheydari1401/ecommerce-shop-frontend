@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
+import resolveImage from "../utils/image";
 
 export default function LazyImage({
   src,
@@ -15,12 +17,14 @@ export default function LazyImage({
   return (
     <div className={`relative overflow-hidden ${className || ""}`}>
       {!loaded && <div className="skeleton w-full h-full absolute inset-0" />}
-      <img
-        src={src}
+
+      <Image
+        src={resolveImage(src)}
+        unoptimized
+        fill
         alt={alt || ""}
-        loading="lazy"
-        onLoad={() => setLoaded(true)}
-        className={`block w-full h-full object-contain ${loaded ? "opacity-100" : "opacity-0"}`}
+        onLoadingComplete={() => setLoaded(true)}
+        className={`block ${loaded ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );

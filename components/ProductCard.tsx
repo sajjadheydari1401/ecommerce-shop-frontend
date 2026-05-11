@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 import { useCart } from "../store/cart";
 import LazyImage from "./LazyImage";
+import resolveImage from "../utils/image";
 
 type Product = {
   id: number;
@@ -17,43 +17,39 @@ export default function ProductCard({ product }: { product: Product }) {
   const add = useCart((state) => state.add);
 
   return (
-    <article className="border rounded p-4 flex flex-col bg-white dark:bg-gray-800 hover:shadow-lg transition-shadow">
-      <div className="h-40 mb-3">
+    <article className="card p-4 flex flex-col hover:shadow-lg transition-transform transform hover:-translate-y-1">
+      <div className="h-44 mb-3 overflow-hidden rounded-md bg-gray-50 dark:bg-gray-700 flex items-center justify-center">
         <LazyImage
-          src={product.image || "/vercel.svg"}
+          src={product.image || ""}
           alt={product.title}
-          className="h-40"
+          className="h-full w-full"
         />
       </div>
       <div className="flex-1">
-        <h3 className="font-medium text-sm leading-tight mb-1">
+        <h3 className="font-medium text-sm leading-tight mb-1 text-gray-900 dark:text-gray-100">
           {product.title}
         </h3>
-        {product.category && (
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {product.category}
-          </p>
-        )}
       </div>
-      <div className="mt-3 flex items-center justify-between gap-3">
+      <div className="mt-4 flex flex-col justify-between gap-3">
         <div className="text-lg font-semibold">
           {product.discountedPrice ? (
             <div className="flex items-baseline gap-2">
-              <span className="text-indigo-600">
-                ${Number(product.discountedPrice).toLocaleString()}
+              <span className="text-brand">
+                IRR {Number(product.discountedPrice).toLocaleString()}
               </span>
               <small className="text-sm text-gray-500 line-through">
-                ${Number(product.price || 0).toLocaleString()}
+                IRR {Number(product.price || 0).toLocaleString()}
               </small>
             </div>
           ) : (
-            <span>${Number(product.price || 0).toLocaleString()}</span>
+            <span>IRR {Number(product.price || 0).toLocaleString()}</span>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2">
           <Link
             href={`/product/${product.id}`}
-            className="px-3 py-1 border rounded text-sm"
+            className="btn btn-ghost"
+            target="_blank"
           >
             Details
           </Link>
@@ -63,12 +59,12 @@ export default function ProductCard({ product }: { product: Product }) {
                 id: product.id,
                 title: product.title,
                 price: Number(product.discountedPrice ?? product.price ?? 0),
-                image: product.image,
+                image: resolveImage(product.image),
               })
             }
-            className="px-3 py-1 bg-brand text-white rounded text-sm"
+            className="btn btn-primary cursor-pointer"
           >
-            Add
+            Add to Cart
           </button>
         </div>
       </div>

@@ -33,11 +33,7 @@ export default function ProductPage() {
       <div className="md:col-span-2">
         <div className="h-96 bg-white dark:bg-gray-800 flex items-center justify-center">
           {images[0] ? (
-            <LazyImage
-              src={images[0]}
-              alt={product.title || product.name}
-              className="h-96"
-            />
+            <LazyImage src={images[0]} alt={product.title} className="h-96" />
           ) : (
             <div>No image</div>
           )}
@@ -51,24 +47,19 @@ export default function ProductPage() {
         </div>
       </div>
       <div>
-        <h1 className="text-2xl font-semibold">
-          {product.title || product.name}
-        </h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-2">
-          {product.category?.name || product.category}
-        </p>
+        <h1 className="text-2xl font-semibold">{product.title}</h1>
         <div className="text-2xl font-bold mt-4">
           {product.discountedPrice ? (
             <div className="flex items-baseline gap-3">
               <span className="text-indigo-600">
-                ${Number(product.discountedPrice).toLocaleString()}
+                IRR {Number(product.discountedPrice).toLocaleString()}
               </span>
               <small className="text-sm text-gray-500 line-through">
-                ${Number(product.price || 0).toLocaleString()}
+                IRR {Number(product.price || 0).toLocaleString()}
               </small>
             </div>
           ) : (
-            <span>${Number(product.price || 0).toLocaleString()}</span>
+            <span>IRR {Number(product.price || 0).toLocaleString()}</span>
           )}
         </div>
         <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">
@@ -79,7 +70,7 @@ export default function ProductPage() {
             onClick={() =>
               add({
                 id: product.id,
-                title: product.title || product.name,
+                title: product.title,
                 price: Number(product.discountedPrice ?? product.price ?? 0),
                 image: images[0] || "",
               })

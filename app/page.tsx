@@ -3,6 +3,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import useDebouncedValue from "../hooks/useDebounce";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useProducts } from "../hooks/useProducts";
+import useCategories from "../hooks/useCategories";
 import ProductCard from "../components/ProductCard";
 
 export default function Home() {
@@ -37,6 +38,8 @@ export default function Home() {
     category: category || null,
   });
   const products = data?.items || [];
+  const { data: categoriesData } = useCategories()
+  const categories = categoriesData || []
 
   const filtered = useMemo(() => products, [products]);
 
@@ -84,7 +87,7 @@ export default function Home() {
           />
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="border rounded px-2 py-2 w-40">
             <option value="">All categories</option>
-            {Array.from(new Set((products || []).map((p: any) => p.categoryName || p.category).filter(Boolean))).map((c: any) => (
+            {categories.map((c: any) => (
               <option key={c} value={c}>{c}</option>
             ))}
           </select>

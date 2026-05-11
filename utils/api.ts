@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from "axios";
 
 export const api = axios.create({
-  baseURL: 'https://api.sport724.ir/api',
+  baseURL: "https://api.sport724.ir/api",
   timeout: 10000,
-})
+});
 
-export default api
+export default api;

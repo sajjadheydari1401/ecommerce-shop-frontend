@@ -22,7 +22,9 @@ export default function CartDrawer({
       <aside className="w-full sm:w-96 bg-white dark:bg-gray-800 p-4 shadow-lg">
         <h3 className="text-lg font-semibold mb-4">Cart</h3>
         {items.length === 0 && (
-          <div className="text-gray-500 dark:text-gray-400">Your cart is empty</div>
+          <div className="text-gray-500 dark:text-gray-400">
+            Your cart is empty
+          </div>
         )}
         <div className="space-y-4">
           {items.map((i) => (
@@ -34,7 +36,9 @@ export default function CartDrawer({
               />
               <div className="flex-1">
                 <div className="font-medium">{i.title}</div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">${Number(i.price).toLocaleString()} each</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  ${Number(i.price).toLocaleString()} each
+                </div>
                 <div className="mt-2 flex items-center gap-2">
                   <button
                     onClick={() => setQuantity(i.id, i.quantity - 1)}
@@ -57,14 +61,20 @@ export default function CartDrawer({
                   </button>
                 </div>
               </div>
-              <div className="text-right">${(Number(i.price) * i.quantity).toFixed(2)}</div>
+              <div className="text-right">
+                ${(Number(i.price) * i.quantity).toFixed(2)}
+              </div>
             </div>
           ))}
         </div>
         <div className="mt-6">
-          <div className="flex justify-between font-semibold">Total <span>${total.toFixed(2)}</span></div>
+          <div className="flex justify-between font-semibold">
+            Total <span>${total.toFixed(2)}</span>
+          </div>
           <div className="mt-3">
-            <button className="w-full bg-brand text-white py-2 rounded">Checkout</button>
+            <button className="w-full bg-brand text-white py-2 rounded">
+              Checkout
+            </button>
           </div>
         </div>
       </aside>

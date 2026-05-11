@@ -34,7 +34,11 @@ export default function ProductPage() {
       <div className="md:col-span-2">
         <div className="h-96 bg-white dark:bg-gray-800 flex items-center justify-center">
           {images[0] ? (
-            <LazyImage src={images[0]} alt={product.title || product.name} className="h-96" />
+            <LazyImage
+              src={images[0]}
+              alt={product.title || product.name}
+              className="h-96"
+            />
           ) : (
             <div>No image</div>
           )}
@@ -57,8 +61,12 @@ export default function ProductPage() {
         <div className="text-2xl font-bold mt-4">
           {product.discountedPrice ? (
             <div className="flex items-baseline gap-3">
-              <span className="text-indigo-600">${Number(product.discountedPrice).toLocaleString()}</span>
-              <small className="text-sm text-gray-500 line-through">${Number(product.price || 0).toLocaleString()}</small>
+              <span className="text-indigo-600">
+                ${Number(product.discountedPrice).toLocaleString()}
+              </span>
+              <small className="text-sm text-gray-500 line-through">
+                ${Number(product.price || 0).toLocaleString()}
+              </small>
             </div>
           ) : (
             <span>${Number(product.price || 0).toLocaleString()}</span>

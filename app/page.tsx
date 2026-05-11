@@ -39,8 +39,8 @@ export default function Home() {
     category: category || null,
   });
   const products = data?.items || [];
-  const { data: categoriesData } = useCategories()
-  const categories = categoriesData || []
+  const { data: categoriesData } = useCategories();
+  const categories = categoriesData || [];
 
   const filtered = useMemo(() => products, [products]);
 
@@ -55,7 +55,7 @@ export default function Home() {
           </div>
         ))}
       </div>
-    )
+    );
   }
 
   if (isError)
@@ -86,10 +86,16 @@ export default function Home() {
             placeholder="Max price"
             className="border rounded px-2 py-2 w-28"
           />
-          <select value={category} onChange={(e) => setCategory(e.target.value)} className="border rounded px-2 py-2 w-40">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="border rounded px-2 py-2 w-40"
+          >
             <option value="">All categories</option>
             {categories.map((c: any) => (
-              <option key={c} value={c}>{c}</option>
+              <option key={c} value={c}>
+                {c}
+              </option>
             ))}
           </select>
         </div>

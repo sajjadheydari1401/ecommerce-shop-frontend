@@ -15,14 +15,16 @@ export default function Navbar({
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem('theme');
+      const stored = localStorage.getItem("theme");
       if (stored) {
-        setDark(stored === 'dark');
-        document.documentElement.classList.toggle('dark', stored === 'dark');
+        setDark(stored === "dark");
+        document.documentElement.classList.toggle("dark", stored === "dark");
       } else {
-        const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const prefers =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
         setDark(prefers);
-        document.documentElement.classList.toggle('dark', prefers);
+        document.documentElement.classList.toggle("dark", prefers);
       }
     } catch (e) {
       // ignore (SSR safe)
@@ -33,24 +35,38 @@ export default function Navbar({
     const next = !dark;
     setDark(next);
     try {
-      document.documentElement.classList.toggle('dark', next);
-      localStorage.setItem('theme', next ? 'dark' : 'light');
+      document.documentElement.classList.toggle("dark", next);
+      localStorage.setItem("theme", next ? "dark" : "light");
     } catch (e) {}
   }
 
   return (
     <header className="w-full bg-white dark:bg-gray-900 shadow-sm">
       <div className="container flex items-center justify-between py-3">
-        <Link href="/" className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+        <Link
+          href="/"
+          className="text-lg font-semibold text-gray-900 dark:text-gray-100"
+        >
           E-Commerce Demo
         </Link>
         <div className="flex items-center gap-3">
-          <button onClick={toggleTheme} aria-label="Toggle theme" className="px-3 py-1 border rounded text-sm">
-            {dark ? 'Light' : 'Dark'}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="px-3 py-1 border rounded text-sm"
+          >
+            {dark ? "Light" : "Dark"}
           </button>
-          <button onClick={onToggleCart} className="flex items-center gap-2 rounded bg-brand px-3 py-1 text-white">
+          <button
+            onClick={onToggleCart}
+            className="flex items-center gap-2 rounded bg-brand px-3 py-1 text-white"
+          >
             Cart
-            {totalCount > 0 && <span className="rounded-full bg-white text-brand px-2 text-sm">{totalCount}</span>}
+            {totalCount > 0 && (
+              <span className="rounded-full bg-white text-brand px-2 text-sm">
+                {totalCount}
+              </span>
+            )}
           </button>
         </div>
       </div>

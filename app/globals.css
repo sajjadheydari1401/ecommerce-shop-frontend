@@ -14,7 +14,9 @@
   --muted: #9ca3af;
 }
 
-html, body, #__next {
+html,
+body,
+#__next {
   height: 100%;
 }
 
@@ -27,13 +29,27 @@ body {
 
 /* Basic typography helpers */
 body {
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
   line-height: 1.5;
 }
 
-h1 { font-size: 1.875rem; font-weight: 700; }
-h2 { font-size: 1.5rem; font-weight: 600; }
-p { color: var(--muted); }
+h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+p {
+  color: var(--muted);
+}
 
 .container {
   max-width: 72rem;
@@ -43,5 +59,6 @@ p { color: var(--muted); }
   padding-right: 1rem;
 }
 
-.skeleton { @apply animate-pulse bg-gray-200 dark:bg-gray-700 }
-
+.skeleton {
+  @apply animate-pulse bg-gray-200 dark:bg-gray-700;
+}

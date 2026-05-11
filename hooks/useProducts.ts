@@ -18,13 +18,22 @@ export function useProducts({
   maxPrice,
 }: UseProductsParams = {}) {
   return useQuery(
-    ["products", page, size, search, minPrice, maxPrice, arguments[0]?.category],
+    [
+      "products",
+      page,
+      size,
+      search,
+      minPrice,
+      maxPrice,
+      arguments[0]?.category,
+    ],
     async () => {
       const params: Record<string, any> = { page, size };
       if (search) params.search = search;
       if (minPrice != null && minPrice !== "") params.minPrice = minPrice;
       if (maxPrice != null && maxPrice !== "") params.maxPrice = maxPrice;
-      if ((arguments[0] as UseProductsParams)?.category) params.category = (arguments[0] as UseProductsParams).category
+      if ((arguments[0] as UseProductsParams)?.category)
+        params.category = (arguments[0] as UseProductsParams).category;
 
       const res = await api.get("/products", { params });
       const data = res.data || {};

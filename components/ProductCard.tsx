@@ -34,9 +34,7 @@ export default function ProductCard({ product }: { product: Product }) {
           ${((product.discountedPrice ?? product.price) as any) || 0}
         </div>
         <div className="flex gap-2">
-          <Link href={`/product/${product.id}`}>
-            <a className="px-3 py-1 border rounded text-sm">Details</a>
-          </Link>
+          <Link href={`/product/${product.id}`} className="px-3 py-1 border rounded text-sm">Details</Link>
           <button
             onClick={() =>
               add({

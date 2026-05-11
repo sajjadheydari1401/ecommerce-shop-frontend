@@ -3,6 +3,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 import { useProduct } from "../../../../hooks/useProducts";
 import { useCart } from "../../../../store/cart";
+import LazyImage from "../../../../components/LazyImage";
 
 export default function ProductPage() {
   const params = useParams();
@@ -33,22 +34,16 @@ export default function ProductPage() {
       <div className="md:col-span-2">
         <div className="h-96 bg-white dark:bg-gray-800 flex items-center justify-center">
           {images[0] ? (
-            <img
-              src={images[0]}
-              alt={product.title || product.name}
-              className="object-contain max-h-96 w-full"
-            />
+            <LazyImage src={images[0]} alt={product.title || product.name} className="h-96" />
           ) : (
             <div>No image</div>
           )}
         </div>
         <div className="mt-2 flex gap-2 overflow-auto">
           {images.map((img: string, idx: number) => (
-            <img
-              key={idx}
-              src={img}
-              className="w-24 h-24 object-contain border"
-            />
+            <div key={idx} className="w-24 h-24">
+              <LazyImage src={img} alt={`thumb-${idx}`} className="w-24 h-24" />
+            </div>
           ))}
         </div>
       </div>

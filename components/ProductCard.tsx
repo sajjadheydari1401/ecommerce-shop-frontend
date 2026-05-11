@@ -1,7 +1,8 @@
-"use client";
-import Link from "next/link";
-import React from "react";
-import { useCart } from "../store/cart";
+"use client"
+import Link from 'next/link'
+import React from 'react'
+import { useCart } from '../store/cart'
+import LazyImage from './LazyImage'
 
 type Product = {
   id: number;
@@ -37,7 +38,7 @@ export default function ProductCard({ product }: { product: Product }) {
           return (
             <article className="border rounded p-4 flex flex-col bg-white dark:bg-gray-800">
               <div className="h-40 mb-3 flex items-center justify-center">
-                <img src={product.image} alt={product.title} className="max-h-40 object-contain w-full" loading="lazy" />
+                <LazyImage src={product.image || '/vercel.svg'} alt={product.title} className="h-40" />
               </div>
               <div className="flex-1">
                 <h3 className="font-medium text-sm leading-tight line-clamp-2">{product.title}</h3>

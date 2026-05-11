@@ -1,30 +1,32 @@
 "use client"
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useProducts } from '../hooks/useProducts'
 import ProductCard from '../components/ProductCard'
 
 export default function Home() {
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [minPrice, setMinPrice] = useState<string>('')
-  const [maxPrice, setMaxPrice] = useState<string>('')
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
-  const { data, isLoading, isError } = useProducts({ page, size: 12 })
+  const [page, setPage] = useState(Number(searchParams.get('page') || '1'))
+  const [search, setSearch] = useState(searchParams.get('search') || '')
+  const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '')
+  const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '')
+
+  useEffect(() => {
+    const params: Record<string, string> = {}
+    if (page && page > 1) params.page = String(page)
+    if (search) params.search = search
+    if (minPrice) params.minPrice = minPrice
+    if (maxPrice) params.maxPrice = maxPrice
+    const query = new URLSearchParams(params).toString()
+    router.replace(query ? `/?${query}` : '/', { scroll: false })
+  }, [page, search, minPrice, maxPrice, router])
+
+  const { data, isLoading, isError } = useProducts({ page, size: 12, search, minPrice: minPrice || null, maxPrice: maxPrice || null })
   const products = data?.items || []
 
-  const filtered = useMemo(() => {
-    const s = search.trim().toLowerCase()
-    return products.filter((p: any) => {
-      const title = (p.title || p.name || '').toString().toLowerCase()
-      if (s && !title.includes(s)) return false
-
-      const price = Number(p.discountedPrice ?? p.price ?? 0)
-      if (minPrice && price < Number(minPrice)) return false
-      if (maxPrice && price > Number(maxPrice)) return false
-
-      return true
-    })
-  }, [products, search, minPrice, maxPrice])
+  const filtered = useMemo(() => products, [products])
 
   if (isLoading) {
     return (

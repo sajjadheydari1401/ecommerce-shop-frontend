@@ -4,11 +4,19 @@ import { api } from "../utils/api"
 type UseProductsParams = {
   page?: number
   size?: number
+  search?: string
+  minPrice?: number | string | null
+  maxPrice?: number | string | null
 }
 
-export function useProducts({ page = 1, size = 10 }: UseProductsParams = {}) {
-  return useQuery(["products", page, size], async () => {
-    const res = await api.get('/products', { params: { page, size } })
+export function useProducts({ page = 1, size = 10, search, minPrice, maxPrice }: UseProductsParams = {}) {
+  return useQuery(['products', page, size, search, minPrice, maxPrice], async () => {
+    const params: Record<string, any> = { page, size }
+    if (search) params.search = search
+    if (minPrice != null && minPrice !== '') params.minPrice = minPrice
+    if (maxPrice != null && maxPrice !== '') params.maxPrice = maxPrice
+
+    const res = await api.get('/products', { params })
     const data = res.data || {}
     return {
       items: data.result || [],

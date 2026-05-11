@@ -60,5 +60,23 @@ p {
 }
 
 .skeleton {
-  @apply animate-pulse bg-gray-200 dark:bg-gray-700;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  animation: pulse 1.5s ease-in-out 0.2s infinite;
+}
+
+.dark .skeleton {
+  background-color: #374151;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }

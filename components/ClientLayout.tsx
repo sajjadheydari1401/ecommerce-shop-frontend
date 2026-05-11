@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { ReactNode, useState } from "react";
 import Providers from "./Providers";
 import Navbar from "./Navbar";
 import CartDrawer from "./CartDrawer";
@@ -7,7 +7,7 @@ import CartDrawer from "./CartDrawer";
 export default function ClientLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [cartOpen, setCartOpen] = useState(false);
 

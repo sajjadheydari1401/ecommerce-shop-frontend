@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../store/cart";
 
 export default function Navbar({

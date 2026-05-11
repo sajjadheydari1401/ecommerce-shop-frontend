@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
+import LazyImage from "@/components/LazyImage";
+import { useProduct } from "@/hooks/useProducts";
+import { useCart } from "@/store/cart";
 import { useParams } from "next/navigation";
-import { useProduct } from "../../../../hooks/useProducts";
-import { useCart } from "../../../../store/cart";
-import LazyImage from "../../../../components/LazyImage";
 
 export default function ProductPage() {
   const params = useParams();

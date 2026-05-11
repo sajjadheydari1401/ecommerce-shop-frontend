@@ -1,17 +1,30 @@
-import { useQuery } from '@tanstack/react-query'
-import { api } from '../utils/api'
+import { useQuery } from "@tanstack/react-query"
+import { api } from "../utils/api"
 
-export function useProducts() {
-  return useQuery(['products'], async () => {
-    const res = await api.get('/products')
-    return res.data || []
+type UseProductsParams = {
+  page?: number
+  size?: number
+}
+
+export function useProducts({ page = 1, size = 10 }: UseProductsParams = {}) {
+  return useQuery(["products", page, size], async () => {
+    const res = await api.get('/products', { params: { page, size } })
+    const data = res.data || {}
+    return {
+      items: data.result || [],
+      pagination: data.pagination || null,
+    }
   })
 }
 
 export function useProduct(productId: string | string[] | undefined) {
-  return useQuery(['product', productId], async () => {
+  return useQuery([
+    'product',
+    productId,
+  ], async () => {
     if (!productId) return null
     const res = await api.get(`/products/${productId}`)
-    return res.data
+    const data = res.data || {}
+    return data.result || null
   }, { enabled: !!productId })
 }

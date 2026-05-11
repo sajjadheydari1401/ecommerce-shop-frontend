@@ -16,6 +16,8 @@ export default function ProductPage() {
 
   const images = product.images && product.images.length ? product.images : (product.image ? [product.image] : [])
 
+  const price = product.discountedPrice ?? product.price ?? product.mutations?.[0]?.salesPrice ?? null
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="md:col-span-2">

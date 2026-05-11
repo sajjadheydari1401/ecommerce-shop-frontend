@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useProducts } from "../hooks/useProducts";
 import useCategories from "../hooks/useCategories";
 import ProductCard from "../components/ProductCard";
+import Skeleton from "../components/Skeleton";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -27,7 +28,7 @@ export default function Home() {
     if (category) params.category = category;
     const query = new URLSearchParams(params).toString();
     router.replace(query ? `/?${query}` : "/", { scroll: false });
-  }, [page, debouncedSearch, minPrice, maxPrice, router]);
+  }, [page, debouncedSearch, minPrice, maxPrice, category, router]);
 
   const { data, isLoading, isError } = useProducts({
     page,
@@ -47,14 +48,14 @@ export default function Home() {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="p-4 border rounded">
-            <div className="h-40 bg-gray-200 animate-pulse mb-3"></div>
-            <div className="h-4 w-3/4 bg-gray-200 animate-pulse mb-2"></div>
-            <div className="h-4 w-1/2 bg-gray-200 animate-pulse"></div>
+          <div key={i} className="p-4 border rounded bg-white dark:bg-gray-800">
+            <Skeleton className="h-40 mb-3" />
+            <Skeleton className="h-4 w-3/4 mb-2" />
+            <Skeleton className="h-4 w-1/2" />
           </div>
         ))}
       </div>
-    );
+    )
   }
 
   if (isError)

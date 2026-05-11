@@ -13,6 +13,7 @@ export default function Home() {
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
   const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
+  const [category, setCategory] = useState(searchParams.get("category") || "");
 
   const debouncedSearch = useDebouncedValue(search, 300);
 
@@ -22,6 +23,7 @@ export default function Home() {
     if (debouncedSearch) params.search = debouncedSearch;
     if (minPrice) params.minPrice = minPrice;
     if (maxPrice) params.maxPrice = maxPrice;
+    if (category) params.category = category;
     const query = new URLSearchParams(params).toString();
     router.replace(query ? `/?${query}` : "/", { scroll: false });
   }, [page, debouncedSearch, minPrice, maxPrice, router]);
@@ -32,6 +34,7 @@ export default function Home() {
     search: debouncedSearch,
     minPrice: minPrice || null,
     maxPrice: maxPrice || null,
+    category: category || null,
   });
   const products = data?.items || [];
 
@@ -79,6 +82,12 @@ export default function Home() {
             placeholder="Max price"
             className="border rounded px-2 py-2 w-28"
           />
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className="border rounded px-2 py-2 w-40">
+            <option value="">All categories</option>
+            {Array.from(new Set((products || []).map((p: any) => p.categoryName || p.category).filter(Boolean))).map((c: any) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
         </div>
       </div>
 

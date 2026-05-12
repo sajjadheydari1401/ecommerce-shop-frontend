@@ -1,52 +1,76 @@
-# E-Commerce Frontend (Sample)
+# E-Commerce Frontend (Demo)
 
-This is a small sample e-commerce frontend built to demonstrate UI, state management, and API integration.
+This repository contains a small, demo e-commerce frontend built with Next.js (App Router), TypeScript and Tailwind CSS. It demonstrates a typical product listing and cart flow with client-side data fetching, state persistence for the cart, and a few UI helpers (skeletons, empty/error states).
 
-Technologies
-- Next.js
-- React Query (@tanstack/react-query)
-- Zustand (cart state, persisted)
+Key features
+
+- Product listing with filters, pagination and search
+- Product detail page with gallery and add-to-cart
+- Cart persisted in-browser via `zustand` + `zustand/middleware` persist
+- Client data fetching using `@tanstack/react-query` and `axios`
+- Responsive UI styled with Tailwind CSS
+- Toast notifications via `react-toastify`
+
+Tech stack
+
+- Next.js (App Router)
+- React 19 + TypeScript
+- @tanstack/react-query
+- zustand (cart state)
+- axios
 - Tailwind CSS
+- react-toastify
 
-Run
+Getting started
 
-Install dependencies:
+1. Install dependencies
 
 ```bash
 npm install
 ```
 
-Run dev server:
+2. Set environment variables
+
+- Create a `.env.local` at the project root and set at least the API base URL:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=https://api.example.com
+```
+
+3. Run in development
 
 ```bash
 npm run dev
 ```
 
-Build:
+4. Build and run production
 
 ```bash
 npm run build
 npm run start
 ```
 
-Architecture
-- `pages/` — Next.js pages
-- `components/` — Reusable UI components
-- `hooks/` — React Query hooks for API calls
-- `store/` — Zustand store for cart, persisted to `localStorage`
-- `utils/api.ts` — Axios instance configured for the sample API
+Useful scripts
 
-Notes
-- Shows loading skeletons while fetching
-- Persists cart to LocalStorage
-- Basic error handling and empty states
-arn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `dev` — starts Next.js in development
+- `build` — builds the app for production
+- `start` — runs the production build
+- `lint` — runs ESLint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Project structure (high level)
 
-## Deploy on Vercel
+- `app/` — Next.js App Router routes (home, product pages, cart)
+- `components/` — reusable UI components and feature components (product, cart, common)
+- `hooks/` — data-fetching and UI hooks (`useProducts`, `useProduct`, `useCheckout`, etc.)
+- `store/` — `zustand` store for cart state
+- `utils/` — shared utilities (e.g., `api.ts` axios instance)
+- `public/` — static assets
+- `types/` — TypeScript interfaces used across the app
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Notes and configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The app expects `NEXT_PUBLIC_API_BASE_URL` to point to your backend API.
+- The axios instance is configured in `utils/api.ts` and reads `process.env.NEXT_PUBLIC_API_BASE_URL`.
+- The cart is persisted to browser storage via `zustand`'s `persist` middleware.
+
+

@@ -19,7 +19,7 @@ export const ThumbnailList = ({
         <button
           key={idx}
           onClick={() => onSelect(idx)}
-          className={`w-24 h-24 shrink-0 border-2 rounded-lg transition-colors overflow-hidden ${
+          className={`w-24 h-24 shrink-0 border-2 rounded-lg transition-colors overflow-hidden cursor-pointer ${
             idx === currentIndex
               ? "border-blue-600 ring-2 ring-blue-200"
               : "border-transparent hover:border-gray-300"

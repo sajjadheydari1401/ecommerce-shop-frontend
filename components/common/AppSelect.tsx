@@ -5,7 +5,7 @@ interface Option {
   label: string;
 }
 
-interface AppSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
   options: Option[] | any[];
@@ -30,7 +30,7 @@ export const AppSelect = ({
   value,
   onChange,
   ...props
-}: AppSelectProps) => {
+}: Props) => {
   const selectId = id || label?.toLowerCase().replace(/\s+/g, "-");
 
   const getOptionValue = (option: any): string => {
@@ -88,7 +88,7 @@ export const AppSelect = ({
             const optionLabel = getOptionLabel(option);
 
             return (
-              <option key={optionValue || idx} value={optionValue}>
+              <option key={optionValue || idx} value={optionLabel}>
                 {optionLabel}
               </option>
             );

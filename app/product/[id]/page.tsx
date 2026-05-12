@@ -1,6 +1,6 @@
 "use client";
 import LazyImage from "@/components/LazyImage";
-import { useProduct } from "@/hooks/useProducts";
+import { useProduct } from "@/hooks/useProduct";
 import { useCart } from "@/store/cart";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -188,7 +188,7 @@ export default function ProductPage() {
                 image: images[0] || "",
               })
             }
-            className="bg-brand text-white px-4 py-2 rounded hover:bg-brand-dark transition-colors disabled:opacity-50"
+            className="bg-brand text-white px-4 py-2 rounded hover:bg-brand-dark transition-colors disabled:opacity-50 cursor-pointer"
             disabled={!product.branches?.["انبار اصلی"]?.available}
           >
             Add to Cart

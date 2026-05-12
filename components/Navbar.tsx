@@ -3,11 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "../store/cart";
 
-export default function Navbar({
-  onToggleCart,
-}: {
-  onToggleCart?: () => void;
-}) {
+export default function Navbar() {
   const items = useCart((state) => state.items);
   const totalCount = items.reduce((s, i) => s + i.quantity, 0);
 
@@ -48,7 +44,7 @@ export default function Navbar({
             E
           </div>
           <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-            E-Commerce
+            724 Online Shop
           </span>
         </Link>
 
@@ -56,13 +52,14 @@ export default function Navbar({
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="btn btn-ghost"
+            className="btn btn-ghost cursor-pointer"
           >
             {dark ? "Light" : "Dark"}
           </button>
-          <button
-            onClick={onToggleCart}
+          <Link
+            href="/cart"
             className="btn btn-primary flex items-center gap-2"
+            target="_blank"
           >
             <span>Cart</span>
             {totalCount > 0 && (
@@ -70,7 +67,7 @@ export default function Navbar({
                 {totalCount}
               </span>
             )}
-          </button>
+          </Link>
         </div>
       </div>
     </header>

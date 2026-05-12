@@ -2,13 +2,7 @@
 
 @theme {
   /* Define your brand color if you have one */
-  --color-brand: #3b82f6; /* Example - adjust to your brand color */
-}
-
-:root {
-  --bg: #ffffff;
-  --fg: #111827;
-  --muted: #6b7280;
+  --color-brand: #3b82f6;
 }
 
 .dark {
@@ -63,7 +57,6 @@ p {
   padding-right: 1rem;
 }
 
-/* Reusable UI helpers - Update @apply syntax for v4 */
 .btn {
   display: inline-flex;
   align-items: center;

@@ -23,7 +23,7 @@ export default function LazyImage({
         unoptimized
         fill
         alt={alt || ""}
-        onLoadingComplete={() => setLoaded(true)}
+        onLoad={() => setLoaded(true)}
         className={`block ${loaded ? "opacity-100" : "opacity-0"}`}
       />
     </div>

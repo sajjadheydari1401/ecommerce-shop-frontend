@@ -40,13 +40,13 @@ export default function Navbar() {
   }
 
   return (
-    <header className="w-full bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm sticky top-0 z-30">
+    <header className="w-full dark:bg-[#0B1220] backdrop-blur-sm sticky top-0 z-30 border-b">
       <div className="container flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-9 h-9 bg-brand rounded-md flex items-center justify-center text-white font-bold">
             E
           </div>
-          <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          <span className="text-lg font-semibold dark:text-gray-100">
             724 Online Shop
           </span>
         </Link>

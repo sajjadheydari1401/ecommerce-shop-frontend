@@ -1,4 +1,5 @@
 import { CartFooterProps } from "@/types/cart";
+import { AppButton } from "../common/AppButton";
 
 export const CartFooter = ({ total, onCheckout, isEmpty }: CartFooterProps) => (
   <div className="mt-6 border-t pt-4">

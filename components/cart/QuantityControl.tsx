@@ -1,3 +1,5 @@
+import { AppButton } from "../common/AppButton";
+
 interface QuantityControlProps {
   quantity: number;
   onDecrement: () => void;
@@ -12,28 +14,36 @@ export const QuantityControl = ({
   onRemove,
 }: QuantityControlProps) => (
   <div className="mt-2 inline-flex items-center gap-2">
-    <button
+    <AppButton
       onClick={onDecrement}
-      className="px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
-      aria-label="Decrease quantity"
+      size="sm"
       disabled={quantity <= 1}
+      aria-label="Decrease quantity"
+      className="cursor-pointer"
     >
       -
-    </button>
-    <div className="px-3 min-w-[40px] text-center">{quantity}</div>
-    <button
+    </AppButton>
+
+    <div className="px-3 min-w-10 text-center font-medium">{quantity}</div>
+
+    <AppButton
       onClick={onIncrement}
-      className="px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+      size="sm"
       aria-label="Increase quantity"
+      className="cursor-pointer"
     >
       +
-    </button>
-    <button
+    </AppButton>
+
+    <AppButton
       onClick={onRemove}
-      className="ml-3 text-sm text-red-600 hover:text-red-700 transition-colors cursor-pointer"
+      isGhost
+      variant="danger"
+      size="sm"
       aria-label="Remove item"
+      className="cursor-pointer"
     >
       Remove
-    </button>
+    </AppButton>
   </div>
 );

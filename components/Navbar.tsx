@@ -1,7 +1,9 @@
 "use client";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "../store/cart";
+import { AppButton } from "./common/AppButton";
 
 export default function Navbar() {
   const items = useCart((state) => state.items);
@@ -13,6 +15,7 @@ export default function Navbar() {
     try {
       const stored = localStorage.getItem("theme");
       if (stored) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setDark(stored === "dark");
         document.documentElement.classList.toggle("dark", stored === "dark");
       } else {
@@ -49,24 +52,24 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-3">
-          <button
+          <AppButton
             onClick={toggleTheme}
+            isGhost
+            variant="secondary"
             aria-label="Toggle theme"
-            className="btn btn-ghost cursor-pointer"
           >
             {dark ? "Light" : "Dark"}
-          </button>
-          <Link
-            href="/cart"
-            className="btn btn-primary flex items-center gap-2"
-            target="_blank"
-          >
-            <span>Cart</span>
-            {totalCount > 0 && (
-              <span className="rounded-full bg-white text-brand px-2 text-xs font-medium">
-                {totalCount}
-              </span>
-            )}
+          </AppButton>
+
+          <Link href="/cart" target="_blank">
+            <AppButton variant="primary" className="flex items-center gap-2">
+              <span>Cart</span>
+              {totalCount > 0 && (
+                <span className="rounded-full bg-white text-brand px-2 text-xs font-medium">
+                  {totalCount}
+                </span>
+              )}
+            </AppButton>
           </Link>
         </div>
       </div>

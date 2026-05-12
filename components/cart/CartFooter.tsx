@@ -6,12 +6,13 @@ export const CartFooter = ({ total, onCheckout, isEmpty }: CartFooterProps) => (
       <span>Total</span>
       <span>IRR {total.toFixed(2)}</span>
     </div>
-    <button
+    <AppButton
       onClick={onCheckout}
-      className="w-full btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+      fullWidth
       disabled={isEmpty}
+      variant="primary"
     >
       Checkout
-    </button>
+    </AppButton>
   </div>
 );

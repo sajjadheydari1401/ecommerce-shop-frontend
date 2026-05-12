@@ -3,6 +3,7 @@ import ClientLayout from "../components/ClientLayout";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
+import { NetworkStatusWrapper } from "@/components/common/NetworkStatusWrapper";
 
 export const metadata: Metadata = {
   title: "E-Commerce Demo",
@@ -20,7 +21,9 @@ export default function RootLayout({
         className="min-h-full flex flex-col"
         suppressHydrationWarning={true}
       >
-        <ClientLayout>{children}</ClientLayout>
+        <NetworkStatusWrapper>
+          <ClientLayout>{children}</ClientLayout>
+        </NetworkStatusWrapper>
         <ToastContainer
           position="bottom-right"
           autoClose={3000}
